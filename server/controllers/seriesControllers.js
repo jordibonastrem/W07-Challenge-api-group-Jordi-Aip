@@ -5,12 +5,17 @@ const getSeries = async (req, res) => {
   res.json(series);
 };
 
-const getSeriesById = async (req, res, next) => {
-  const { idSerie } = req.params;
+const updateSeriesById = async (req, res, next) => {
   try {
-    const searchedSeries = await Serie.findById(idSerie);
-    if (searchedSeries) {
-      res.json(searchedSeries);
+    const series = req.body;
+    const { _id } = req.body;
+
+    const updatedSeries = await Serie.findByIdAndUpdate(_id, req.body, {
+      runValidators: true,
+      new: true,
+    });
+    if (updatedSeries) {
+      res.json(series);
     } else {
       const error = new Error("Yeah... sorry. Serie not found.");
       error.code = 404;
@@ -40,4 +45,4 @@ const deleteSerie = async (req, res, next) => {
   }
 };
 
-module.exports = { getSeries, getSeriesById, deleteSerie };
+module.exports = { getSeries, updateSeriesById, deleteSerie };
