@@ -5,4 +5,21 @@ const getSeries = async (req, res) => {
   res.json(series);
 };
 
-module.exports = { getSeries };
+const getSeriesById = async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    const searchedSeries = await Serie.find({ _id: id, user: req.userId });
+    if (searchedSeries) {
+      res.json(searchedSeries);
+    } else {
+      const error = new Error("Serie not found");
+      error.code = 404;
+      next(error);
+    }
+  } catch (error) {
+    error.code = 400;
+    next(error);
+  }
+};
+
+module.exports = { getSeries, getSeriesById };
