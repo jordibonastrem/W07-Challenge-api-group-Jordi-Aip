@@ -1,5 +1,9 @@
 const express = require("express");
-const { getSeries, deleteSerie } = require("../controllers/seriesControllers");
+const {
+  getSeries,
+  deleteSerie,
+  getSeriesById,
+} = require("../controllers/seriesControllers");
 
 const router = express.Router();
 
