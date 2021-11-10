@@ -50,8 +50,8 @@ describe("Given a getSeriesById function", () => {
     });
   });
 
-  describe("And When it receives a request and response, and Robot.findById resolves to K9", () => {
-    test("Then it should invoke res.json with K9", async () => {
+  describe("And When it receives a request and response, and Serie.findById resolves to serieMolona", () => {
+    test("Then it should invoke res.json with serieMolona", async () => {
       const idSerie = 7;
       const serieMolona = {
         idSerie,
@@ -75,6 +75,48 @@ describe("Given a getSeriesById function", () => {
       await getSeriesById(req, res);
 
       expect(res.json).toHaveBeenCalledWith(serieMolona);
+    });
+  });
+
+  describe("And when it receives a next function too, and the promise Serie.findById rejects", () => {
+    test("Then it should invoke the next function with the rejected error", async () => {
+      const error = {};
+      const next = jest.fn();
+      Serie.findById = jest.fn().mockRejectedValue(error);
+      const req = {
+        params: {
+          id: 5,
+        },
+      };
+      const res = {};
+
+      await getSeriesById(req, res, next);
+
+      expect(next).toHaveBeenCalledWith(error);
+      expect(error).toHaveProperty("code");
+      expect(error.code).toBe(400);
+    });
+  });
+
+  describe("And When it receives an id that does not correspond to an existing robot", () => {
+    test("Then it should invoke next with the error and the error.code should be 404", async () => {
+      const idSeries = 7;
+      const error = new Error("Yeah... sorry. Serie not found.");
+      Serie.findById = jest.fn().mockResolvedValue(null);
+
+      const req = {
+        params: {
+          idSeries,
+        },
+      };
+
+      const res = () => {};
+
+      const next = jest.fn();
+
+      await getSeriesById(req, res, next);
+
+      expect(next).toHaveBeenCalledWith(error);
     });
   });
 });
