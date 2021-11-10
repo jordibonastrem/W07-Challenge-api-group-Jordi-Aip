@@ -5,6 +5,7 @@ Create DB w/collections:
   --field to save SEEN SERIES
   --ID
   --USERNAME
+  --platforms
 
 - PLATFORMS:
   -- ID
