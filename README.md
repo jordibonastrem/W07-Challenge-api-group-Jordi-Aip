@@ -15,3 +15,4 @@ Create DB w/collections:
   -- ID
   -- NAME
   -- field saying SEEN/NOTSEEN
+  -- platform

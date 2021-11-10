@@ -4,7 +4,10 @@ const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
 const seriesRoutes = require("./routes/seriesRoutes");
-const { notFoundErrorHandler, generalErrorHandler } = require("./error");
+const {
+  notFoundErrorHandler,
+  generalErrorHandler,
+} = require("./middlewares/error");
 const userRoutes = require("./routes/userRoutes");
 
 const app = express();
