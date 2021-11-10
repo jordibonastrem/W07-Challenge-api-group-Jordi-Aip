@@ -49,4 +49,32 @@ describe("Given a getSeriesById function", () => {
       expect(Serie.findById).toHaveBeenLastCalledWith(idSerie);
     });
   });
+
+  describe("And When it receives a request and response, and Robot.findById resolves to K9", () => {
+    test("Then it should invoke res.json with K9", async () => {
+      const idSerie = 7;
+      const serieMolona = {
+        idSerie,
+        name: "serie12",
+        isSeen: true,
+        platform: "netflix",
+      };
+
+      Serie.findById = jest.fn().mockResolvedValue(serieMolona);
+
+      const req = {
+        params: {
+          idSerie,
+        },
+      };
+
+      const res = {
+        json: jest.fn(),
+      };
+
+      await getSeriesById(req, res);
+
+      expect(res.json).toHaveBeenCalledWith(serieMolona);
+    });
+  });
 });
