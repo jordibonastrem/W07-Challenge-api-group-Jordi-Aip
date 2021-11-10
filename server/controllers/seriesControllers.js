@@ -6,9 +6,9 @@ const getSeries = async (req, res) => {
 };
 
 const getSeriesById = async (req, res, next) => {
-  const { id } = req.params;
+  const { idSerie } = req.params;
   try {
-    const searchedSeries = await Serie.find({ _id: id, user: req.userId });
+    const searchedSeries = await Serie.findById(idSerie);
     if (searchedSeries) {
       res.json(searchedSeries);
     } else {
@@ -38,6 +38,6 @@ const deleteSerie = async (req, res, next) => {
     error.message = "Ooooooooooooh! Caught in a Bad Request!";
     next(error);
   }
-
-  module.exports = { getSeries, getSeriesById, deleteSerie };
 };
+
+module.exports = { getSeries, getSeriesById, deleteSerie };

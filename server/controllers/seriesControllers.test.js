@@ -1,6 +1,6 @@
 const Serie = require("../../database/models/series");
 
-const { getSeries } = require("./seriesControllers");
+const { getSeries, getSeriesById } = require("./seriesControllers");
 
 jest.mock("../../database/models/series");
 
@@ -24,6 +24,29 @@ describe("Given a getSeries function", () => {
       await getSeries(null, res);
       expect(Serie.find).toHaveBeenCalled();
       expect(res.json).toHaveBeenCalledWith(series);
+    });
+  });
+});
+
+describe("Given a getSeriesById function", () => {
+  describe("When it receives an object with an id 5, a response and a next function", () => {
+    test("Then it should invoke Serie.findbyId with a 5", async () => {
+      const idSerie = 5;
+      const req = {
+        params: {
+          idSerie,
+        },
+      };
+      const res = {
+        json: () => {},
+      };
+
+      const next = () => {};
+      Serie.findById = jest.fn().mockResolvedValue({});
+
+      await getSeriesById(req, res, next);
+
+      expect(Serie.findById).toHaveBeenLastCalledWith(idSerie);
     });
   });
 });
