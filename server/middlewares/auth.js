@@ -13,7 +13,7 @@ const auth = (req, res, next) => {
   } else {
     const token = authHeader.split(" ")[1];
     if (!token) {
-      debug(chalk.red("Nice try. Better go home."));
+      debug(chalk.red(". Better go home."));
       const error = new Error("Nice try. Better go home. Tok");
       error.code = 401;
       next(error);

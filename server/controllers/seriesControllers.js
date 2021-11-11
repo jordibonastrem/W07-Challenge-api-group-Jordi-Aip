@@ -1,3 +1,5 @@
+const chalk = require("chalk");
+const debug = require("debug")("robots:server");
 const Serie = require("../../database/models/series");
 
 const getSeries = async (req, res) => {
@@ -27,6 +29,19 @@ const updateSeriesById = async (req, res, next) => {
   }
 };
 
+const createSerie = async (req, res, next) => {
+  try {
+    debug(chalk.cyanBright("Alright. *Pat pat*."));
+    const newSerie = await Serie.create(req.body);
+    res.json(newSerie);
+  } catch (error) {
+    debug(chalk.red("Nope. All wrong."));
+    error.message = "Nope. All wrong.";
+    error.code = 400;
+    next(error);
+  }
+};
+
 const deleteSerie = async (req, res, next) => {
   const { idSerie } = req.params;
   try {
@@ -45,4 +60,4 @@ const deleteSerie = async (req, res, next) => {
   }
 };
 
-module.exports = { getSeries, updateSeriesById, deleteSerie };
+module.exports = { getSeries, updateSeriesById, deleteSerie, createSerie };
