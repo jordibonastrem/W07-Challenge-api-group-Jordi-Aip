@@ -1,10 +1,11 @@
 const chalk = require("chalk");
 const debug = require("debug")("robots:server");
 const Serie = require("../../database/models/series");
+const User = require("../../database/models/user");
 
 const getSeries = async (req, res) => {
-  const series = await Serie.find();
-  res.json(series);
+  const loggedUser = await User.findOne({ _id: req.userId }).populate("Series");
+  res.json(loggedUser.seenSeries);
 };
 
 const updateSeriesById = async (req, res, next) => {
