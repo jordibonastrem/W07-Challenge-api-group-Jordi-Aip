@@ -116,7 +116,36 @@ describe("Given a updateSeriesById function", () => {
     });
   });
 
-  describe("And When it receives an id that does not correspond to an existing serie", () => {
+  describe("And When it receives an id that does not correspond to an existing serie (404)", () => {
+    test("Then it should invoke next with the error ", async () => {
+      const idSerie = 5;
+      const req = {
+        body: {
+          _id: idSerie,
+        },
+      };
+      Serie.findByIdAndUpdate = jest.fn().mockResolvedValue(null);
+
+      const res = {
+        json: jest.fn(),
+      };
+      const next = jest.fn();
+      const expectedError = {
+        code: 404,
+        message: "Yeah... sorry. Serie not found.",
+      };
+
+      await updateSeriesById(req, res, next);
+
+      expect(next.mock.calls[0][0]).toHaveProperty(
+        "message",
+        expectedError.message
+      );
+      expect(next.mock.calls[0][0]).toHaveProperty("code", expectedError.code);
+    });
+  });
+
+  describe("And When the promise Serie.findByIdAndUpdate rejects", () => {
     test("Then it should invoke next with the error ", async () => {
       const req = {};
       const error = {};
