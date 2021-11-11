@@ -31,6 +31,24 @@ describe("Given a getSeries function", () => {
       expect(res.json).toHaveBeenCalledWith(series);
     });
   });
+
+  describe("When it receives an object res and an invalid object req", () => {
+    test("Then it should invoke next with an error", async () => {
+      const req = {};
+      const error = {};
+
+      Serie.create = jest.fn().mockRejectedValue(error);
+
+      const res = {
+        json: jest.fn(),
+      };
+      const next = jest.fn();
+
+      await createSerie(req, res, next);
+
+      expect(next).toHaveBeenCalledWith(error);
+    });
+  });
 });
 
 describe("Given a deleteSeries function", () => {
