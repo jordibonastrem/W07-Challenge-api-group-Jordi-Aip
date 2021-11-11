@@ -49,7 +49,7 @@ ok [GET] /series: lista todas las series del usuario, vistas o no
 
 [GET] /series/pending: lista todas las series del usuario no vistas
 
-aip [POST] /series: para crear una nueva serie - busca en header un auth
+ok -joi ok [POST] /series: para crear una nueva serie - busca en header un auth
 
 ok [PUT] /series/:idSerie : para actualizar una serie
 
