@@ -46,19 +46,36 @@ afterAll(async () => {
   await server.close();
 });
 
-describe("When it gets a POST request for /series without all the required fields", () => {
-  test("Then it should send a response with an error and a status code of 401", async () => {
-    const { body } = await request
-      .post("/series")
-      .set("Authorization", `Bearer ${token}`)
-      .send({ name: "Parks and Recreation" })
-      .expect(401);
+describe("Given the endpoint /series", () => {
+  describe("When it gets a POST request without all the required fields", () => {
+    test("Then it should send a response with an error and a status code of 401", async () => {
+      const { body } = await request
+        .post("/series")
+        .set("Authorization", `Bearer ${token}`)
+        .send({ name: "Parks and Recreation" })
+        .expect(401);
 
-    const expectedError = {
-      error:
-        "Oh no! You've made a mistake! (If it'd only be the first one you've ever made...)",
-    };
+      const expectedError = {
+        error:
+          "Oh no! You've made a mistake! (If it'd only be the first one you've ever made...)",
+      };
 
-    expect(body).toEqual(expectedError);
+      expect(body).toEqual(expectedError);
+    });
+  });
+  describe("When it gets a POST series request with all the required fields", () => {
+    test("Then it should respond with the series, including the db id", async () => {
+      const { body } = await request
+        .post("/series")
+        .set("Authorization", `Bearer ${token}`)
+        .send({
+          name: "Parks and Recreation",
+          isSeen: false,
+          platform: "hulu",
+        })
+        .expect(200);
+
+      expect(body).toHaveProperty("name", "Parks and Recreation");
+    });
   });
 });
