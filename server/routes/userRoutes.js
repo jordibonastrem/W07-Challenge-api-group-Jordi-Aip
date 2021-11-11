@@ -1,8 +1,8 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
-/* const { validate } = require("express-validation");
-const logInController = require("../controller/logInController");
-const loginSchema = require("../Schema/userSchemas"); */
+const { validate } = require("express-validation");
+const { loginUser } = require("../controllers/usersControllers");
+const { loginSchema } = require("../schemas/userSchema");
 
 const router = express.Router();
 
@@ -17,7 +17,6 @@ router.get("/", async () => {
   });
 });
 
-/*  ESTA LINEA ES COPIADA DE OTRO REPO 
-router.post("/login", validate(loginSchema, {}, {}), logInController);  */
+router.post("/login", validate(loginSchema), loginUser);
 
 module.exports = router;
