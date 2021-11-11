@@ -18,7 +18,8 @@ const generalErrorHandler = (error, req, res, next) => {
   const message = error.code
     ? error.message
     : "Panic! You've broken everything down and nobody loves you!";
-  res.status(error.code || 500).json({ error: message });
+  res.status(error.code || 500);
+  res.json({ error: message });
 };
 
 module.exports = {

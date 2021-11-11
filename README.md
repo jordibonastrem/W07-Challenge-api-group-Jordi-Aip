@@ -31,7 +31,7 @@ Cada serie pertenece a una plataforma y tendrá (además de lo que creas conveni
 
 Enpoints (todos están protegidos por JWT menos los que se indiquen como abiertos):
 
-jordi [POST] /users/login: endpoint abierto, para iniciar sesión
+jordi -schema [POST] /users/login: endpoint abierto, para iniciar sesión
 
 jordi [POST] /users/register: endpoint abierto, para crear un usuario (register) -- mira el body de la request y pasa el joi (examina el body y comprueba el "formato"), busca el usuario en el body , creará un usuario en la base de datos y emite una response con status 201, sino manda un error al middleware de errores.
 
@@ -60,12 +60,3 @@ ok [DELETE] /series/:idSerie : para borrar una serie
 Valida todas las requests necesarias con Joi
 Haz tests unitarios de todos los middlewares
 Haz tests de integración de todos los endpoints
-
-const User = require("../../database/models/user");
-router.get("/", async () => {
-User.create({
-name: "MiBot",
-username: "botMolon23",
-password: await bcrypt.hash("soyRobot45!", 10),
-});
-});
