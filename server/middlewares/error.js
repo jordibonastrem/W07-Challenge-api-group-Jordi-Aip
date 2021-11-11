@@ -3,7 +3,7 @@ const { ValidationError } = require("express-validation");
 
 const notFoundErrorHandler = (req, res) => {
   res.status(404).json({
-    error: "Error. Peligro. Endpoint se ha perdido. Endpoint no encontrado.",
+    error: "Dead end... Go back to where you came from.",
   });
 };
 

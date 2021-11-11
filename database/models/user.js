@@ -13,6 +13,10 @@ const userSchema = new Schema({
     type: Boolean,
     required: true,
   },
+  password: {
+    type: String,
+    required: true,
+  },
 });
 
 const User = model("User", userSchema, "Users");
