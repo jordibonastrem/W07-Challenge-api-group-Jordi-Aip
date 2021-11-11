@@ -14,7 +14,10 @@ const auth = (req, res, next) => {
     const token = authHeader.split(" ")[1];
     console.log(token);
     if (!token) {
+
+
       debug(chalk.red("Nice try. Better go home.There is auth but is"));
+
       const error = new Error("Nice try. Better go home. Tok");
       error.code = 401;
       next(error);

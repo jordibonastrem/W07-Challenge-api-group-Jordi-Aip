@@ -31,9 +31,9 @@ Cada serie pertenece a una plataforma y tendrá (además de lo que creas conveni
 
 Enpoints (todos están protegidos por JWT menos los que se indiquen como abiertos):
 
-[POST] /users/login: endpoint abierto, para iniciar sesión
+jordi [POST] /users/login: endpoint abierto, para iniciar sesión
 
-[POST] /users/register: endpoint abierto, para crear un usuario
+jordi [POST] /users/register: endpoint abierto, para crear un usuario (register) -- mira el body de la request y pasa el joi (examina el body y comprueba el "formato"), busca el usuario en el body , creará un usuario en la base de datos y emite una response con status 201, sino manda un error al middleware de errores.
 
 [GET] /platforms: lista todas las plataformas
 
@@ -43,17 +43,17 @@ Enpoints (todos están protegidos por JWT menos los que se indiquen como abierto
 
 [DELETE] /platforms/:idPlatform : para borrar una plataforma (sólo administrador)
 
-[GET] /series: lista todas las series del usuario, vistas o no
+ok [GET] /series: lista todas las series del usuario, vistas o no
 
 [GET] /series/viewed: lista todas las series del usuario ya vistas
 
 [GET] /series/pending: lista todas las series del usuario no vistas
 
-[POST] /series: para crear una nueva serie
+aip [POST] /series: para crear una nueva serie - busca en header un auth
 
-[PUT] /series/:idSerie : para actualizar una serie
+ok [PUT] /series/:idSerie : para actualizar una serie
 
-[DELETE] /series/:idSerie : para borrar una serie
+ok [DELETE] /series/:idSerie : para borrar una serie
 
 [PATCH] /series/view/:idSerie : para marcar una serie como vista
 
