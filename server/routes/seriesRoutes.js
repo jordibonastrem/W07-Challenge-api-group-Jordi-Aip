@@ -8,7 +8,7 @@ const {
 const router = express.Router();
 
 router.get("/", getSeries);
-router.get("/:idSerie", updateSeriesById);
+router.put("/:idSerie", updateSeriesById);
 router.delete("/:idSerie", deleteSerie);
 
 module.exports = router;

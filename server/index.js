@@ -26,6 +26,7 @@ const initializeServer = (port) =>
 
     server.on("error", (error) => {
       debug(chalk.red("Oh no! The server's feeling ignored :(."));
+
       if (error.code === "EADDRINUSE") {
         debug(
           chalk.blue(`Oops! Port ${port} is busy (talk to your hand instead).`)
