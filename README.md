@@ -60,3 +60,12 @@ Enpoints (todos están protegidos por JWT menos los que se indiquen como abierto
 Valida todas las requests necesarias con Joi
 Haz tests unitarios de todos los middlewares
 Haz tests de integración de todos los endpoints
+
+const User = require("../../database/models/user");
+router.get("/", async () => {
+User.create({
+name: "MiBot",
+username: "botMolon23",
+password: await bcrypt.hash("soyRobot45!", 10),
+});
+});

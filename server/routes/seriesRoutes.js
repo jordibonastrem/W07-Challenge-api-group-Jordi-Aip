@@ -2,13 +2,13 @@ const express = require("express");
 const {
   getSeries,
   deleteSerie,
-  getSeriesById,
+  updateSeriesById,
 } = require("../controllers/seriesControllers");
 
 const router = express.Router();
 
 router.get("/", getSeries);
-router.get("/:idSerie", getSeriesById);
+router.get("/:idSerie", updateSeriesById);
 router.delete("/:idSerie", deleteSerie);
 
 module.exports = router;
