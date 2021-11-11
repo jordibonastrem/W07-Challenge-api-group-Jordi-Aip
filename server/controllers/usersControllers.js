@@ -7,20 +7,20 @@ const loginUser = async (req, res, next) => {
   const { username, password } = req.body;
   const user = await User.findOne({ username });
   if (!user) {
-    const error = new Error("Wrong user or password");
+    const error = new Error("Wrong user");
     error.code = 401;
     next(error);
   } else {
     const rightPassword = await bcrypt.compare(password, user.password);
     if (!rightPassword) {
-      const error = new Error("Wrong user or password");
+      const error = new Error("Wrong password");
       error.code = 401;
       next(error);
     } else {
       const token = jwt.sign(
         {
           id: user.id,
-          name: user.name,
+          name: user.username,
         },
         process.env.JWT_SECRET,
         {
