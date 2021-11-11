@@ -13,6 +13,6 @@ const router = express.Router();
 router.get("/", getSeries);
 router.put("/:idSerie", updateSeriesById);
 router.delete("/:idSerie", deleteSerie);
-router.post("/series", validate(createSeriesSchema), createSerie);
+router.post("/", validate(createSeriesSchema), createSerie);
 
 module.exports = router;
