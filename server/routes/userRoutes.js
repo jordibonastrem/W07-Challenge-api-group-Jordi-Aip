@@ -10,7 +10,7 @@ const User = require("../../database/models/user");
 
 router.get("/", async () => {
   User.create({
-    username: "botMolon23",
+    username: "usuarioGuay",
     seenSeries: ["serie55", "serie22"],
     isAdmin: false,
     password: await bcrypt.hash("soyUsuario", 10),
