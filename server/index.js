@@ -9,6 +9,7 @@ const {
   generalErrorHandler,
 } = require("./middlewares/error");
 const userRoutes = require("./routes/userRoutes");
+const auth = require("./middlewares/auth");
 
 const app = express();
 
@@ -40,7 +41,7 @@ app.use(cors());
 app.use(express.json());
 app.use(morgan("dev"));
 
-app.use("/series", seriesRoutes);
+app.use("/series", auth, seriesRoutes);
 app.use("/users", userRoutes);
 /* app.use("/platform", platformsRoutes); */
 
